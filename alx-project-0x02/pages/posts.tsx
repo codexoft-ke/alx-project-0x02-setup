@@ -3,13 +3,15 @@ import { GetStaticProps } from 'next';
 import Header from '@/components/layout/Header';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
-import { PageProps } from '../interfaces';
+import PostCard from '@/components/common/PostCard';
+import { PageProps, PostProps } from '../interfaces';
 
 interface PostsPageProps extends PageProps {
   currentTime: string;
+  posts: PostProps[];
 }
 
-export default function PostsPage({ title, currentTime }: PostsPageProps) {
+export default function PostsPage({ title, currentTime, posts }: PostsPageProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header title="Posts - ALX Project 0x02" />
@@ -29,37 +31,30 @@ export default function PostsPage({ title, currentTime }: PostsPageProps) {
             </p>
           </div>
 
-          {/* Sample Posts */}
+          {/* API Posts */}
           <div className="space-y-6">
-            <Card 
-              title="🚀 Getting Started with Next.js"
-              content="Learn the fundamentals of Next.js and how to build modern web applications with React. This comprehensive guide covers routing, server-side rendering, and deployment strategies for production-ready applications."
-              variant="primary"
-            />
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                📡 Posts from JSONPlaceholder API
+              </h2>
+              <p className="text-gray-600 mb-4">
+                Below are real posts fetched from the JSONPlaceholder API, 
+                displayed using our custom PostCard component.
+              </p>
+              <p className="text-sm text-gray-500">
+                Total posts loaded: {posts.length}
+              </p>
+            </div>
 
-            <Card 
-              title="🔧 TypeScript Best Practices"
-              content="Discover essential TypeScript patterns and best practices for building scalable applications. From interface design to advanced type manipulation, this post covers everything you need to know about type-safe development."
-              variant="secondary"
-            />
-
-            <Card 
-              title="🎨 Styling with Tailwind CSS"
-              content="Master the utility-first CSS framework that's revolutionizing how we style web applications. Learn about responsive design, component patterns, and optimization techniques for better performance."
-              variant="success"
-            />
-
-            <Card 
-              title="⚡ Performance Optimization Tips"
-              content="Boost your web application's performance with these proven techniques. From code splitting to image optimization, discover strategies that will make your users happy and your metrics green."
-              variant="warning"
-            />
-
-            <Card 
-              title="🔐 Security in Modern Web Apps"
-              content="Protect your applications and users with modern security practices. Learn about authentication, authorization, data validation, and common vulnerabilities to avoid in production environments."
-              variant="danger"
-            />
+            {posts.map((post) => (
+              <PostCard
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                body={post.body}
+                userId={post.userId}
+              />
+            ))}
           </div>
 
           {/* Action Buttons */}
@@ -117,10 +112,34 @@ export default function PostsPage({ title, currentTime }: PostsPageProps) {
 }
 
 export const getStaticProps: GetStaticProps<PostsPageProps> = async () => {
-  return {
-    props: {
-      title: "Posts - ALX Project 0x02",
-      currentTime: new Date().toISOString(),
-    },
-  };
+  try {
+    // Fetch posts from JSONPlaceholder API
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const posts: PostProps[] = await response.json();
+
+    // Limit to first 10 posts for better UX
+    const limitedPosts = posts.slice(0, 10);
+
+    return {
+      props: {
+        title: "Posts - ALX Project 0x02",
+        currentTime: new Date().toISOString(),
+        posts: limitedPosts,
+      },
+      // Revalidate every hour (3600 seconds)
+      revalidate: 3600,
+    };
+  } catch (error) {
+    console.error('Failed to fetch posts:', error);
+    
+    // Fallback with empty posts array
+    return {
+      props: {
+        title: "Posts - ALX Project 0x02",
+        currentTime: new Date().toISOString(),
+        posts: [],
+      },
+      revalidate: 60, // Retry more frequently on error
+    };
+  }
 };
