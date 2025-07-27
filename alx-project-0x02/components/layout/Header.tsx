@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface HeaderProps {
   title?: string;
@@ -12,28 +13,28 @@ const Header: React.FC<HeaderProps> = ({ title = "ALX Project 0x02" }) => {
         <nav className="mt-4">
           <ul className="flex justify-center space-x-6">
             <li>
-              <a 
+              <Link 
                 href="/" 
-                className="hover:text-blue-200 transition-colors duration-200"
+                className="hover:text-blue-200 transition-colors duration-200 font-medium"
+              >
+                Index
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/home" 
+                className="hover:text-blue-200 transition-colors duration-200 font-medium"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a 
+              <Link 
                 href="/about" 
-                className="hover:text-blue-200 transition-colors duration-200"
+                className="hover:text-blue-200 transition-colors duration-200 font-medium"
               >
                 About
-              </a>
-            </li>
-            <li>
-              <a 
-                href="/contact" 
-                className="hover:text-blue-200 transition-colors duration-200"
-              >
-                Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
