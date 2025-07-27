@@ -35,3 +35,10 @@ export interface PageProps {
   title?: string;
   description?: string;
 }
+
+export interface CardProps {
+  title: string;
+  content: string;
+  className?: string;
+  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+}

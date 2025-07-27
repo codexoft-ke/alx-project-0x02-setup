@@ -1,6 +1,7 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import Header from '../components/layout/Header';
+import Card from '../components/common/Card';
 import { PageProps } from '../interfaces';
 
 interface AboutPageProps extends PageProps {
@@ -27,91 +28,32 @@ export default function AboutPage({ title, currentTime }: AboutPageProps) {
             </p>
           </div>
 
-          <div className="space-y-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                🎯 Project Mission
-              </h2>
-              <p className="text-gray-600 leading-relaxed">
-                This project is designed to demonstrate proficiency in Next.js, TypeScript, 
-                and modern web development practices. We're building a scalable, maintainable, 
-                and user-friendly application that showcases the power of the React ecosystem.
-              </p>
-            </div>
+          <div className="space-y-6">
+            <Card 
+              title="🎯 Project Mission"
+              content="This project is designed to demonstrate proficiency in Next.js, TypeScript, and modern web development practices. We're building a scalable, maintainable, and user-friendly application that showcases the power of the React ecosystem."
+              variant="primary"
+            />
 
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                💻 Technology Stack
-              </h2>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-blue-600 font-semibold">Framework:</span>
-                    <span className="text-gray-700">Next.js 15+</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-blue-600 font-semibold">Language:</span>
-                    <span className="text-gray-700">TypeScript</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-blue-600 font-semibold">Styling:</span>
-                    <span className="text-gray-700">Tailwind CSS</span>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-600 font-semibold">Routing:</span>
-                    <span className="text-gray-700">Pages Router</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-600 font-semibold">Linting:</span>
-                    <span className="text-gray-700">ESLint</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-green-600 font-semibold">Development:</span>
-                    <span className="text-gray-700">Hot Reload</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Card 
+              title="💻 Technology Stack"
+              content="Built with Next.js 15+ framework, TypeScript language, and Tailwind CSS for styling. Features include Pages Router for navigation, ESLint for code quality, and Hot Reload for enhanced development experience."
+              variant="secondary"
+            />
 
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                🌟 Key Features
-              </h2>
-              <ul className="space-y-2 text-gray-600">
-                <li className="flex items-start space-x-2">
-                  <span className="text-purple-600 mt-1">•</span>
-                  <span>Server-side rendering for optimal performance</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-purple-600 mt-1">•</span>
-                  <span>Type-safe development with TypeScript</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-purple-600 mt-1">•</span>
-                  <span>Responsive design with Tailwind CSS</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-purple-600 mt-1">•</span>
-                  <span>Component-based architecture</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-purple-600 mt-1">•</span>
-                  <span>File-based routing system</span>
-                </li>
-              </ul>
-            </div>
+            <Card 
+              title="🌟 Key Features"
+              content="Server-side rendering for optimal performance, type-safe development with TypeScript, responsive design with Tailwind CSS, component-based architecture, and file-based routing system for seamless navigation."
+              variant="success"
+            />
           </div>
 
-          <div className="mt-8 bg-indigo-50 border border-indigo-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-indigo-800 mb-3">
-              🎓 Learning Objectives
-            </h3>
-            <p className="text-indigo-700">
-              Through this project, we're mastering modern web development concepts including 
-              routing, component composition, state management, and deployment strategies.
-            </p>
+          <div className="mt-8">
+            <Card 
+              title="🎓 Learning Objectives"
+              content="Through this project, we're mastering modern web development concepts including routing, component composition, state management, and deployment strategies. The reusable Card component demonstrates our understanding of props, TypeScript interfaces, and component reusability."
+              variant="warning"
+            />
           </div>
         </div>
       </main>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import Header from '../components/layout/Header';
+import Card from '../components/common/Card';
 import { PageProps } from '../interfaces';
 
 interface HomePageProps extends PageProps {
@@ -27,46 +28,46 @@ export default function HomePage({ title, currentTime }: HomePageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-blue-800 mb-4">
-                🏠 Home Features
-              </h2>
-              <ul className="space-y-2 text-blue-700">
-                <li>• Project overview and introduction</li>
-                <li>• Quick navigation to other sections</li>
-                <li>• Latest updates and announcements</li>
-                <li>• Featured content and highlights</li>
-              </ul>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-semibold text-green-800 mb-4">
-                🚀 Quick Actions
-              </h2>
-              <div className="space-y-3">
-                <button className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors">
-                  Get Started
-                </button>
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors">
-                  View Documentation
-                </button>
-                <button className="w-full bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition-colors">
-                  Explore Features
-                </button>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <Card 
+              title="🏠 Home Features"
+              content="Discover the key features of our home page including project overview, quick navigation to other sections, latest updates and announcements, and featured content highlights."
+              variant="primary"
+            />
+            
+            <Card 
+              title="🚀 Quick Actions"
+              content="Get started with our application quickly! Access documentation, explore features, and begin your journey with our comprehensive set of tools and resources."
+              variant="success"
+            />
+            
+            <Card 
+              title="📊 Project Stats"
+              content="Track your progress and view important metrics about the project. Monitor performance, user engagement, and development milestones in real-time."
+              variant="secondary"
+            />
           </div>
 
-          <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-yellow-800 mb-3">
-              📝 Note about Routing
-            </h3>
-            <p className="text-yellow-700">
-              This page demonstrates Next.js Pages Router functionality. You can navigate 
-              between different pages using the navigation links in the header above.
-            </p>
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <Card 
+              title="💡 Getting Started Tips"
+              content="New to the project? Here are some helpful tips to get you started. Learn about the project structure, key concepts, and best practices for development."
+              variant="warning"
+            />
+            
+            <Card 
+              title="🔧 Development Tools"
+              content="Explore our comprehensive set of development tools including TypeScript support, ESLint configuration, Tailwind CSS utilities, and Next.js optimizations."
+              variant="default"
+            />
           </div>
+
+          <Card 
+            title="📝 Note about Routing"
+            content="This page demonstrates Next.js Pages Router functionality using reusable Card components. You can navigate between different pages using the navigation links in the header above. Each card is now powered by our custom Card component with different variants and styling options."
+            variant="danger"
+            className="mb-8"
+          />
         </div>
       </main>
 
