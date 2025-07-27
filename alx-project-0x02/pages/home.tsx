@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import Header from '../components/layout/Header';
-import Card from '../components/common/Card';
+import Card from '@/components/common/Card';
 import { PageProps } from '../interfaces';
 
 interface HomePageProps extends PageProps {
