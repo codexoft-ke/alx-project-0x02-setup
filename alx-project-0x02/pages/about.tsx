@@ -2,6 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Header from '../components/layout/Header';
 import Card from '@/components/common/Card';
+import Button from '@/components/common/Button';
 import { PageProps } from '../interfaces';
 
 interface AboutPageProps extends PageProps {
@@ -54,6 +55,109 @@ export default function AboutPage({ title, currentTime }: AboutPageProps) {
               content="Through this project, we're mastering modern web development concepts including routing, component composition, state management, and deployment strategies. The reusable Card component demonstrates our understanding of props, TypeScript interfaces, and component reusability."
               variant="warning"
             />
+          </div>
+
+          {/* Button Component Showcase */}
+          <div className="mt-12">
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                🔘 Button Component Showcase
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Our reusable Button component supports different sizes and shapes, 
+                making it flexible for various use cases throughout the application.
+              </p>
+              
+              {/* Button Examples */}
+              <div className="space-y-8">
+                {/* Size Variations */}
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-4">Different Sizes</h3>
+                  <div className="flex flex-wrap gap-4 items-center">
+                    <Button 
+                      size="small" 
+                      variant="primary"
+                      onClick={() => alert('Small button clicked!')}
+                    >
+                      Small Button
+                    </Button>
+                    <Button 
+                      size="medium" 
+                      variant="success"
+                      onClick={() => alert('Medium button clicked!')}
+                    >
+                      Medium Button
+                    </Button>
+                    <Button 
+                      size="large" 
+                      variant="warning"
+                      onClick={() => alert('Large button clicked!')}
+                    >
+                      Large Button
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Shape Variations */}
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-4">Different Shapes</h3>
+                  <div className="flex flex-wrap gap-4 items-center">
+                    <Button 
+                      shape="rounded-sm" 
+                      variant="secondary"
+                      onClick={() => alert('Sharp corners button clicked!')}
+                    >
+                      Sharp Corners
+                    </Button>
+                    <Button 
+                      shape="rounded-md" 
+                      variant="primary"
+                      onClick={() => alert('Rounded corners button clicked!')}
+                    >
+                      Rounded Corners
+                    </Button>
+                    <Button 
+                      shape="rounded-full" 
+                      variant="danger"
+                      onClick={() => alert('Fully rounded button clicked!')}
+                    >
+                      Fully Rounded
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Combined Variations */}
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-4">Combined Variations</h3>
+                  <div className="flex flex-wrap gap-4 items-center">
+                    <Button 
+                      size="small" 
+                      shape="rounded-full" 
+                      variant="success"
+                      onClick={() => alert('Small + Fully Rounded button clicked!')}
+                    >
+                      Small & Round
+                    </Button>
+                    <Button 
+                      size="large" 
+                      shape="rounded-sm" 
+                      variant="primary"
+                      onClick={() => alert('Large + Sharp button clicked!')}
+                    >
+                      Large & Sharp
+                    </Button>
+                    <Button 
+                      size="medium" 
+                      shape="rounded-md" 
+                      variant="default"
+                      disabled
+                    >
+                      Disabled Button
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
