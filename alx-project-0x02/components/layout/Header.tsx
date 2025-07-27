@@ -36,6 +36,14 @@ const Header: React.FC<HeaderProps> = ({ title = "ALX Project 0x02" }) => {
                 About
               </Link>
             </li>
+            <li>
+              <Link 
+                href="/posts" 
+                className="hover:text-blue-200 transition-colors duration-200 font-medium"
+              >
+                Posts
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
