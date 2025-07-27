@@ -131,7 +131,8 @@ export default function UsersPage({ title, currentTime, users }: UsersPageProps)
   );
 }
 
-export const getStaticProps: GetStaticProps<UsersPageProps> = async () => {
+// Data fetching function - Next.js calls getStaticProps() at build time
+export async function getStaticProps(): Promise<{ props: UsersPageProps; revalidate: number }> {
   try {
     // Fetch users from JSONPlaceholder API
     const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -159,4 +160,4 @@ export const getStaticProps: GetStaticProps<UsersPageProps> = async () => {
       revalidate: 60, // Retry more frequently on error
     };
   }
-};
+}
