@@ -42,3 +42,16 @@ export interface CardProps {
   className?: string;
   variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
 }
+
+export interface PostModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (post: { title: string; content: string }) => void;
+}
+
+export interface NewPost {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+}

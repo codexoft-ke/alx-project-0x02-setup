@@ -1,14 +1,27 @@
-import React from 'react';
-import { GetStaticProps } from 'next';
+import React, { useState } from 'react';
 import Header from '../components/layout/Header';
 import Card from '@/components/common/Card';
-import { PageProps } from '../interfaces';
+import PostModal from '@/components/common/PostModal';
+import { NewPost } from '../interfaces';
 
-interface HomePageProps extends PageProps {
-  currentTime: string;
-}
+export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userPosts, setUserPosts] = useState<NewPost[]>([]);
 
-export default function HomePage({ title, currentTime }: HomePageProps) {
+  const handleCreatePost = (postData: { title: string; content: string }) => {
+    const newPost: NewPost = {
+      id: Date.now().toString(),
+      title: postData.title,
+      content: postData.content,
+      createdAt: new Date().toISOString(),
+    };
+
+    setUserPosts(prevPosts => [newPost, ...prevPosts]);
+  };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header title="Home - ALX Project 0x02" />
@@ -16,17 +29,47 @@ export default function HomePage({ title, currentTime }: HomePageProps) {
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h1 className="text-5xl font-bold text-gray-800 mb-6">
-              Welcome to the Home Page
-            </h1>
-            <p className="text-lg text-gray-600 mb-6">
-              This is the home page of our Next.js application. Here you can find 
-              an overview of our project and its features.
-            </p>
-            <p className="text-sm text-gray-500 mb-4">
-              Page loaded at: {currentTime}
-            </p>
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <h1 className="text-5xl font-bold text-gray-800 mb-4">
+                  Welcome to the Home Page
+                </h1>
+                <p className="text-lg text-gray-600 mb-4">
+                  This is the home page of our Next.js application. Here you can find 
+                  an overview of our project and its features.
+                </p>
+                <p className="text-sm text-gray-500">
+                  Page loaded at: {new Date().toLocaleString()}
+                </p>
+              </div>
+              <button
+                onClick={openModal}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md hover:shadow-lg"
+              >
+                ✏️ Create Post
+              </button>
+            </div>
           </div>
+
+          {/* User Posts Section */}
+          {userPosts.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Posts</h2>
+              <div className="space-y-4">
+                {userPosts.map((post) => (
+                  <div key={post.id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl font-semibold text-gray-800">{post.title}</h3>
+                      <span className="text-sm text-gray-500">
+                        {new Date(post.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">{post.content}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <Card 
@@ -64,7 +107,7 @@ export default function HomePage({ title, currentTime }: HomePageProps) {
 
           <Card 
             title="📝 Note about Routing"
-            content="This page demonstrates Next.js Pages Router functionality using reusable Card components. You can navigate between different pages using the navigation links in the header above. Each card is now powered by our custom Card component with different variants and styling options."
+            content="This page demonstrates Next.js Pages Router functionality using reusable Card components. You can navigate between different pages using the navigation links in the header above. Each card is now powered by our custom Card component with different variants and styling options. You can also create new posts using the modal functionality!"
             variant="danger"
             className="mb-8"
           />
@@ -76,15 +119,13 @@ export default function HomePage({ title, currentTime }: HomePageProps) {
           <p>&copy; 2025 ALX Project 0x02 - Home Page. Built with Next.js, TypeScript, and Tailwind CSS.</p>
         </div>
       </footer>
+
+      {/* Modal Component */}
+      <PostModal 
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onSubmit={handleCreatePost}
+      />
     </div>
   );
 }
-
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  return {
-    props: {
-      title: "Home - ALX Project 0x02",
-      currentTime: new Date().toISOString(),
-    },
-  };
-};
