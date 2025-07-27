@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Header from '../components/layout/Header';
+import Header from '@/components/layout/Header';
 import Card from '@/components/common/Card';
 import Button from '@/components/common/Button';
 import { PageProps } from '../interfaces';
